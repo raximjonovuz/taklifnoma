@@ -35,7 +35,7 @@ export default function LanguageButton() {
         </svg>
       </button>
       {open && (
-        <ul className="frosted mt-2 overflow-hidden rounded-2xl border border-gold-300/70 reveal reveal--in">
+        <ul className="frosted dropdown-enter mt-2 overflow-hidden rounded-2xl border border-gold-300/70">
           {locales.map((l) => (
             <li key={l}>
               <button

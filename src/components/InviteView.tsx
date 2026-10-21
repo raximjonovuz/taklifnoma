@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useLockScroll } from "@/lib/useLockScroll";
 import { useAudio } from "@/lib/useAudio";
 import Preloader from "@/components/Preloader";
@@ -9,8 +9,9 @@ import Hero from "@/components/Hero";
 import Invitation from "@/components/Invitation";
 import CoupleSection from "@/components/Couple";
 import Countdown from "@/components/Countdown";
-import Location from "@/components/Location";
+import Details from "@/components/Details";
 import Contacts from "@/components/Contacts";
+import Closing from "@/components/Closing";
 import MusicButton from "@/components/MusicButton";
 import LanguageButton from "@/components/LanguageButton";
 import EditorialCard from "@/components/EditorialCard";
@@ -37,7 +38,9 @@ export default function InviteView({ couple }: { couple: Couple }) {
           {phase === "content" && (
             <div className="relative">
               <Hero couple={couple} />
-              <Invitation couple={couple} />
+              <Suspense fallback={null}>
+                <Invitation couple={couple} />
+              </Suspense>
               <div className="relative">
                 <div
                   className="rule-gold mx-auto h-px w-3/4"
@@ -54,17 +57,13 @@ export default function InviteView({ couple }: { couple: Couple }) {
                 className="rule-gold mx-auto h-px w-3/4"
                 aria-hidden="true"
               />
-              <Location couple={couple} />
+              <Details couple={couple} />
               <div
                 className="rule-gold mx-auto h-px w-3/4"
                 aria-hidden="true"
               />
               <Contacts couple={couple} />
-              <footer className="px-6 pb-14 pt-8 text-center text-[11px] uppercase tracking-[0.4em] text-charcoal-soft">
-                {couple.names.groomFull.uz.split(" ")[0]} &amp;{" "}
-                {couple.names.brideFull.uz.split(" ")[0]} ©{" "}
-                {new Date().getFullYear()}
-              </footer>
+              <Closing couple={couple} />
             </div>
           )}
         </EditorialCard>
@@ -78,7 +77,9 @@ export default function InviteView({ couple }: { couple: Couple }) {
         <Envelope
           groomName={couple.names.groomFull.uz}
           brideName={couple.names.brideFull.uz}
-          onOpen={openEnvelope}
+          dateLabel="15 · 11 · 2026"
+          yearLabel={new Date(couple.date).getFullYear().toString()}
+          onContinue={openEnvelope}
         />
       )}
     </>

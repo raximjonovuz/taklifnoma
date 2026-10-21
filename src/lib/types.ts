@@ -16,11 +16,13 @@ export interface Couple {
   greeting: Localized;
   date: string;
   time: string;
+  gatheringTime: string;
+  dressCode: Localized;
   venue: Localized;
   address: Localized;
   venueLat: number;
   venueLng: number;
-  phones: { label: string; phone: string }[];
+  phones: { label: string; sublabel?: string; phone: string }[];
   telegram: string;
   heroImage: string;
   music: string;

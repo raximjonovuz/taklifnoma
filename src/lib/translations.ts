@@ -107,6 +107,93 @@ export const UI = {
   },
   musicOn: { uz: "Musiqa", ru: "Музыка", en: "Music" },
   musicOff: { uz: "Musiqa yoqish", ru: "Вкл. музыку", en: "Play music" },
+
+  // ─── Design-aligned strings ──────────────────────────────
+  envelopeHeader: {
+    uz: "TAKLIFNOMA · 2026",
+    ru: "ПРИГЛАШЕНИЕ · 2026",
+    en: "INVITATION · 2026",
+  },
+  swipeToContinue: {
+    uz: "Davom etish uchun suring",
+    ru: "Свайпните, чтобы продолжить",
+    en: "Swipe to continue",
+  },
+  bismillah: {
+    uz: "Bismillahir Rohmaanir Rohiym",
+    ru: "Бисмилляхир Рахмаанир Рахиим",
+    en: "Bismillahir Rahmanir Rahim",
+  },
+  welcomeGuest: {
+    uz: "Hurmatli mehmon!",
+    ru: "Дорогой гость!",
+    en: "Dear guest!",
+  },
+  continueCta: {
+    uz: "Davom etish",
+    ru: "Продолжить",
+    en: "Continue",
+  },
+  continueReady: {
+    uz: "Davom etishga tayyor",
+    ru: "Готовы продолжить",
+    en: "Ready to continue",
+  },
+  waitingSeconds: {
+    uz: "Tugma 5 soniyadan keyin paydo bo'ladi...",
+    ru: "Кнопка появится через 5 секунд...",
+    en: "The button appears in 5 seconds...",
+  },
+  detailsTitle: {
+    uz: "TAFSILOTLAR",
+    ru: "ДЕТАЛИ",
+    en: "DETAILS",
+  },
+  whenAndWhereTitle: {
+    uz: "Qachon va Qayerda",
+    ru: "Когда и Где",
+    en: "When and Where",
+  },
+  gatheringLabel: {
+    uz: "Mehmonlar yig'ilishi",
+    ru: "Сбор гостей",
+    en: "Guest gathering",
+  },
+  dressCodeTitle: {
+    uz: "Kiyinish kodi",
+    ru: "Дресс-код",
+    en: "Dress code",
+  },
+  contactInviteTitle: {
+    uz: "Biz bilan bog'laning",
+    ru: "Свяжитесь с нами",
+    en: "Reach out to us",
+  },
+  contactTeleLabel: {
+    uz: "Telegram orqali",
+    ru: "Через Telegram",
+    en: "Via Telegram",
+  },
+  closingTitle: {
+    uz: "Ko'rishguncha",
+    ru: "До встречи",
+    en: "See you there",
+  },
+  closingLine: {
+    uz: "Sizni baxtli kunimizda ko'rganimizdan xursand bo'lamiz",
+    ru: "Будем рады видеть вас в наш счастливый день",
+    en: "We would be happy to see you on our special day",
+  },
+  yearPromise: {
+    uz: "{year}-yilda quchoqlaymiz",
+    ru: "Ждём в {year}",
+    en: "See you in {year}",
+  },
+  reviewCta: {
+    uz: "Ko'rib chiqishni tugatish",
+    ru: "Завершить просмотр",
+    en: "Finish the review",
+  },
 } satisfies Record<string, Record<Locale, string>>;
 
 export type UiKey = keyof typeof UI;

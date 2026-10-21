@@ -1,18 +1,12 @@
 import type { Metadata } from "next";
 import {
   Cormorant_Garamond,
+  DM_Mono,
   Inter,
   Playfair_Display,
 } from "next/font/google";
 import "./globals.css";
 import { LocaleProvider } from "@/lib/LocaleContext";
-
-const serif = Cormorant_Garamond({
-  variable: "--font-serif",
-  subsets: ["latin", "cyrillic"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
 
 const display = Playfair_Display({
   variable: "--font-display",
@@ -22,9 +16,23 @@ const display = Playfair_Display({
   display: "swap",
 });
 
+const serif = Cormorant_Garamond({
+  variable: "--font-serif",
+  subsets: ["latin", "cyrillic"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
 const sans = Inter({
   variable: "--font-sans",
   subsets: ["latin", "cyrillic"],
+  display: "swap",
+});
+
+const mono = DM_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  weight: ["400", "500"],
   display: "swap",
 });
 
@@ -42,7 +50,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="uz"
-      className={`${serif.variable} ${display.variable} ${sans.variable} h-full`}
+      className={`${display.variable} ${serif.variable} ${sans.variable} ${mono.variable} h-full`}
     >
       <body className="min-h-screen text-[15px] leading-relaxed">
         <LocaleProvider>{children}</LocaleProvider>

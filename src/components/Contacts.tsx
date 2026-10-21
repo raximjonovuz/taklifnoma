@@ -9,35 +9,56 @@ import type { Couple } from "@/lib/types";
 
 export default function Contacts({ couple }: { couple: Couple }) {
   const { locale } = useLocale();
+  const tg = couple.telegram.replace(/^@/, "");
   return (
     <Reveal className="mx-auto flex w-full max-w-md flex-col items-center px-6 py-20 text-center">
       <Ornament />
-      <h2 className="font-display mt-6 text-2xl text-charcoal">
-        {UI.contactsTitle[locale]}
+      <p className="eyebrow mt-6">{UI.contactsTitle[locale]}</p>
+      <h2 className="font-display mt-3 text-3xl text-ink-primary">
+        {UI.contactInviteTitle[locale]}
       </h2>
 
-      <ul className="mt-10 w-full">
+      <ul className="mt-12 w-full">
         {couple.phones.map((p, i) => (
-          <li key={i} className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 py-5">
-            <span className="eyebrow text-right">{p.label}</span>
+          <li
+            key={i}
+            className="grid grid-cols-[auto_1fr_auto] items-center gap-4 py-5"
+          >
+            <span className="text-left">
+              <span className="font-display text-lg text-ink-primary">
+                {p.label}
+              </span>
+              {p.sublabel && (
+                <span className="block eyebrow mt-1 text-ink-muted">
+                  {p.sublabel}
+                </span>
+              )}
+            </span>
             <span
-              className="block h-px w-12 border-b border-dashed border-gold-300/60"
+              className="block h-px w-full border-b border-dashed border-gold-300/55"
               aria-hidden="true"
             />
             <CopyablePhone value={p.phone} />
           </li>
         ))}
+        <li className="grid grid-cols-[auto_1fr_auto] items-center gap-4 py-5">
+          <span className="text-left font-display text-lg text-ink-primary">
+            Telegram
+          </span>
+          <span
+            className="block h-px w-full border-b border-dashed border-gold-300/55"
+            aria-hidden="true"
+          />
+          <a
+            href={`https://t.me/${tg}`}
+            target="_blank"
+            rel="noreferrer"
+            className="font-mono text-[13px] tracking-widest text-gold-600 transition-colors hover:text-gold-500"
+          >
+            {couple.telegram}
+          </a>
+        </li>
       </ul>
-
-      <a
-        href={`https://t.me/${couple.telegram.replace(/^@/, "")}`}
-        target="_blank"
-        rel="noreferrer"
-        className="mt-8 inline-flex items-center gap-2 rounded-full border border-gold-300 px-5 py-2 text-sm text-charcoal transition-colors duration-500 hover:bg-espresso-100 hover:text-gold-200"
-      >
-        <span>Telegram</span>
-        <span className="font-display italic">{couple.telegram}</span>
-      </a>
     </Reveal>
   );
 }
@@ -55,10 +76,17 @@ function CopyablePhone({ value }: { value: string }) {
     }
   };
   return (
-    <div className="flex items-center justify-start gap-2">
+    <div className="flex items-center justify-end gap-2">
+      <span
+        className={`text-[10px] uppercase tracking-widest text-gold-500 transition-opacity ${
+          copied ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        {UI.copied[locale]}
+      </span>
       <a
         href={`tel:${value.replace(/\s+/g, "")}`}
-        className="font-display text-lg text-charcoal hover:text-gold-500"
+        className="font-mono text-[13px] tracking-widest text-ink-primary hover:text-gold-600"
       >
         {value}
       </a>
@@ -66,7 +94,7 @@ function CopyablePhone({ value }: { value: string }) {
         type="button"
         onClick={onCopy}
         aria-label={UI.copyNumber[locale]}
-        className="text-gold-500 transition-opacity hover:text-gold-400"
+        className="text-gold-600 transition-opacity hover:text-gold-500"
       >
         <svg
           viewBox="0 0 24 24"
@@ -88,13 +116,6 @@ function CopyablePhone({ value }: { value: string }) {
           )}
         </svg>
       </button>
-      <span
-        className={`text-[10px] uppercase tracking-widest text-gold-500 transition-opacity ${
-          copied ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        {UI.copied[locale]}
-      </span>
     </div>
   );
 }
