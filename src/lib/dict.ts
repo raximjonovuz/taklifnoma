@@ -79,7 +79,7 @@ const uz = {
 
   "lp.search.title": "Taklifnoma qidiring",
   "lp.search.sub": "Kuyov yoki kelin ismini yozing — manzilingizni o'zingiz kiriting",
-  "lp.search.ph": "Masalan: Jasur",
+  "lp.search.ph": "Masalan: Ozodbek",
   "lp.search.btn": "Qidirish",
   "lp.search.empty": "Hech narsa topilmadi",
   "lp.search.emptySub": "Ismni boshqa tarzda yozib ko'ring yoki bizga murojaat qiling.",
@@ -291,7 +291,7 @@ const en: Record<TKey, string> = {
 
   "lp.search.title": "Find an invitation",
   "lp.search.sub": "Type the groom or bride name — you provide the address",
-  "lp.search.ph": "For example: Jasur",
+  "lp.search.ph": "For example: Ozodbek",
   "lp.search.btn": "Search",
   "lp.search.empty": "Nothing found",
   "lp.search.emptySub": "Try another spelling or contact us.",

@@ -12,7 +12,7 @@ import slugs from "../../couples.json";
 import type { Couple, CoupleData, CoupleIndexItem } from "@/lib/types";
 
 const sources: Record<string, CoupleData> = {
-  "jasur-madina": demo,
+  "Ozodbek": demo,
 };
 
 const fromJson = slugs as string[];
