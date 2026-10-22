@@ -13,6 +13,9 @@
 # testing
 /coverage
 
+# avtomatik generatsiya qilinadi (scripts/gen-boot.mjs)
+/public/boot.js
+
 # next.js
 /.next/
 /out/

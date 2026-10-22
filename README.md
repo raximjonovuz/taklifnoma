@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Taklifnoma — to'y taklifnomasi (Next.js, statik eksport)
 
-## Getting Started
+Manba (HTML/CSS/JS) loyihaning to'liq kloni: dizayn, animatsiyalar va tugmalar
+ishlashi Next.js + TypeScript ga ko'chirilgan. Rasmlar va ma'lumotlar — o'z
+manbalimizdan.
 
-First, run the development server:
+## Manzillar
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+| URL | Natija |
+| --- | --- |
+| `taklifnoma.raximjonov.uz/` | Landing (3 ko'rinish: bosh / qidiruv / aloqa) |
+| `taklifnoma.raximjonov.uz/jasur-madina/` | Taklifnoma |
+| `jasur-madina.taklifnoma.raximjonov.uz/` | Avtomatik ravishda `/jasur-madina/` ga o'tadi |
+
+Subdomen tekshiruvi `public/boot.js` orqali bajariladi (statik eksportda server
+yo'q). Bu fayl `scripts/gen-boot.mjs` da `couples.json` + `CNAME` dan yaratiladi
+(`npm run dev`/`npm run build` oldidan avtomatik). Boshqa subdomen yoki domen →
+landing. Fayl Git'ga qo'shilmaydi.
+
+## Tuzilma
+
+```
+src/
+  app/
+    layout.tsx        fontlar (Cormorant Garamond + Great Vibes), metadata, ikonkalar
+    globals.css       barcha dizayn, animatsiyalar, landing uslublari
+    page.tsx          landing + subdomen → taklifnoma scripti
+    [slug]/page.tsx   taklifnoma (generateStaticParams orqali statik)
+    not-found.tsx
+  components/
+    Ornaments.tsx     SVG bezak/ikonalar kutubxonasi
+    invite/           Preloader, Cover (3D konvert), Hero, Letter, CoupleSection,
+                      Countdown, Venue, Rsvp, Contacts, Outro
+    landing/Landing   uch ko'rinish (hash orqali: #home #search #contact)
+    fx/               Petals (canvas), CursorFx (kursor + uchqunlar)
+    ui/               LangSwitch, MusicButton
+  lib/
+    types.ts          ma'lumot tiplari
+    dict.ts           3 tilning lug'ati (uz/ru/en)
+    useLang.ts        til holati (?lang= → localStorage → brauzer)
+    fx.ts             parallax, kursor, tilt/magnet, reveal, scroll progress
+    site.ts           domen, Telegram, havola yordamchilari
+    telegram.ts       RSVP/kontakt xabarlari (deep link)
+    format.ts         sana, telefon, slug normalizatsiyasi
+  couples/            ma'lumotlar (hozir lokal, keyin server)
+
+couples.json          taklifnoma sluglari ro'yxati (boot.js shundan yaratiladi)
+scripts/gen-boot.mjs  public/boot.js generatsiyasi
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Ma'lumot
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`src/couples/demo.ts` — bitta juftlik. `couples.json` — sluglar ro'yxati
+(ro'yxat bilan moduli mos kelmasa, build xato beradi). Serverga o'tkazish uchun
+faqat `src/couples/index.ts` dagi `getCouple` / `coupleIndex` ni API dan
+o'qishga o'zgartiring: komponentlar o'zgarmaydi.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Rasm yo'q bo'lsa (hero/arch/venue) dizayn o'z-o'zidan bezakli to'ldiruvchiga
+tushadi. Xarita esa ko'rinmaganda yuklanmaydi.
 
-## Learn More
+## Telegram
 
-To learn more about Next.js, take a look at the following resources:
+Hozir javoblar to'g'ridan-to'g'ri Telegram chat ochish orqali yuboriladi
+(`t.me/<username>?text=...`). Bot ulash uchun `src/lib/site.ts` dagi
+`TELEGRAM_BOT` ni to'ldiring va `src/lib/telegram.ts` dagi `openTelegram`
+o'rniga server orqali `sendMessage` chaqiring.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Buyruqlar
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+npm run dev        # ishlab chiqish
+npm run build      # statik eksport → out/
+npm run lint       # eslint
+npm run typecheck  # tsc --noEmit
+```

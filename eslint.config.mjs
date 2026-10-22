@@ -5,13 +5,21 @@ import nextTs from "eslint-config-next/typescript";
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
-  // Override default ignores of eslint-config-next.
+  // Rasmlar next/image'siz: dizayn CSS'i to'g'ridan-to'g'ri <img> bilan yozilgan
+  // (statik eksport, rasm moslashuvi o'zimizning).
+  {
+    rules: {
+      "@next/next/no-img-element": "off",
+    },
+  },
+  // Default ignores of eslint-config-next:
   globalIgnores([
-    // Default ignores of eslint-config-next:
     ".next/**",
     "out/**",
     "build/**",
-    "next-env.d.ts",
+    "next-env.dts",
+    // scripts/gen-boot.mjs dan generatsiya qilinadi
+    "public/boot.js",
   ]),
 ]);
 

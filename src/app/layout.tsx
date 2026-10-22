@@ -1,59 +1,63 @@
-import type { Metadata } from "next";
-import {
-  Cormorant_Garamond,
-  DM_Mono,
-  Inter,
-  Playfair_Display,
-} from "next/font/google";
+﻿import type { Metadata, Viewport } from "next";
+import Script from "next/script";
+import { Cormorant_Garamond, Great_Vibes } from "next/font/google";
+import { Symbols } from "@/components/Ornaments";
+import { BASE_DOMAIN, SITE_NAME } from "@/lib/site";
 import "./globals.css";
-import { LocaleProvider } from "@/lib/LocaleContext";
-
-const display = Playfair_Display({
-  variable: "--font-display",
-  subsets: ["latin", "cyrillic"],
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
-  display: "swap",
-});
 
 const serif = Cormorant_Garamond({
   variable: "--font-serif",
   subsets: ["latin", "cyrillic"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
-const sans = Inter({
-  variable: "--font-sans",
-  subsets: ["latin", "cyrillic"],
-  display: "swap",
-});
-
-const mono = DM_Mono({
-  variable: "--font-mono",
+const script = Great_Vibes({
+  variable: "--font-script",
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Taklifnoma",
-  description: "To'y taklifnomasi",
-  openGraph: {
-    title: "Taklifnoma",
-    description: "To'y taklifnomasi",
-    type: "website",
+  metadataBase: new URL(`https://${BASE_DOMAIN}`),
+  title: {
+    default: `${SITE_NAME} — to'y taklifnomasi`,
+    template: `%s — ${SITE_NAME}`,
   },
+  description:
+    "Ism-familiyani kiriting, taklifnoma tayyor. Do'stlaringizga yuboring — ular shu havolani ochsa, taklifnoma darhol ko'rinadi.",
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    locale: "uz_UZ",
+  },
+  robots: { index: true, follow: true },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#120E0A",
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
+    // `suppressHydrationWarning`: `/boot.js` gidratsiyadan oldin `<html>` ga
+    // `is-locked` klassini qo'shadi (konvert paytida scroll bloklash).
     <html
       lang="uz"
-      className={`${display.variable} ${serif.variable} ${sans.variable} ${mono.variable} h-full`}
+      className={`${serif.variable} ${script.variable}`}
+      suppressHydrationWarning
     >
-      <body className="min-h-screen text-[15px] leading-relaxed">
-        <LocaleProvider>{children}</LocaleProvider>
+      <body>
+        {/* `public/boot.js` — subdomen → taklifnoma, konvert paytida scroll bloklash.
+            Fayl `scripts/gen-boot.mjs` da `couples.json` + `CNAME` dan yaratiladi. */}
+        <Script id="boot" src="/boot.js" strategy="beforeInteractive" />
+        <Symbols />
+        {children}
       </body>
     </html>
   );
