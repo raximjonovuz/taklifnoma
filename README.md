@@ -9,13 +9,13 @@ manbalimizdan.
 | URL | Natija |
 | --- | --- |
 | `taklifnoma.raximjonov.uz/` | Landing (3 ko'rinish: bosh / qidiruv / aloqa) |
-| `taklifnoma.raximjonov.uz/jasur-madina/` | Taklifnoma |
-| `jasur-madina.taklifnoma.raximjonov.uz/` | Avtomatik ravishda `/jasur-madina/` ga o'tadi |
+| `taklifnoma.raximjonov.uz/qiz-bola-isim/` | Taklifnoma |
 
-Subdomen tekshiruvi `public/boot.js` orqali bajariladi (statik eksportda server
-yo'q). Bu fayl `scripts/gen-boot.mjs` da `site.json` (domen) + `couples.json`
-(sluglar) dan yaratiladi (`npm run dev`/`npm run build` oldidan avtomatik).
-Boshqa subdomen yoki domen → landing. Fayl Git'ga qo'shilmaydi.
+Landing qidiruvi shu havolalarni beradi. `/` da scroll bloklanmaydi,
+`/qiz-bola-isim/` da esa konvert ochilguncha bloklanadi — buni `public/boot.js`
+bajaradi (statik eksportda server yo'q). Fayl `scripts/gen-boot.mjs` da
+`couples.json` (sluglar) dan yaratiladi (`npm run dev`/`npm run build` oldidan
+avtomatik) va Git'ga qo'shilmaydi.
 
 ## Tuzilma
 
