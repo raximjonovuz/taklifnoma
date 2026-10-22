@@ -58,8 +58,8 @@ export default function Venue({
     return () => io.disconnect();
   }, [map]);
 
-  const google = mapsUrl || `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
-  const yandex = yandexUrl || `https://yandex.uz/maps/?rtext=~${lat},${lng}&rtt=auto`;
+  const google = mapsUrl || `https://www.google.com/maps/${lat},${lng}`;
+  const yandex = yandexUrl || `https://yandex.uz/maps/=~${lat},${lng}&rtt=auto`;
   const src = `https://maps.google.com/maps?q=${lat},${lng}&z=16&hl=${
     lang === "uz" ? "ru" : lang
   }&output=embed`;

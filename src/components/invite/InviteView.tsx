@@ -7,7 +7,7 @@ import Hero from "./Hero";
 import Letter from "./Letter";
 import CoupleSection from "./CoupleSection";
 import Countdown from "./Countdown";
-import Venue from "./Venue";
+import TestSection from "./TestSection";
 import Rsvp from "./Rsvp";
 import Contacts from "./Contacts";
 import Outro from "./Outro";
@@ -169,22 +169,20 @@ export default function InviteView({ couple }: { couple: Couple }) {
           />
         ) : null}
 
-        <Venue
-          title={t["venue.title"]}
-          name={pick(couple.venue.name, lang)}
-          address={pick(couple.venue.address, lang)}
-          note={pick(couple.venue.note, lang)}
-          date={dateStr}
-          time={couple.event.time}
-          lat={couple.venue.lat}
-          lng={couple.venue.lng}
-          mapsUrl={couple.venue.mapsUrl}
-          yandexUrl={couple.venue.yandexUrl}
-          photo={couple.images.venue}
+        {/* Lokatsiya vaqtincha olib tashlangan — o'rnida test bo'limi.
+            Haqiqiy manzil kerak bo'lsa: <Venue .../> ni qaytarish yetarli. */}
+        <TestSection
           lang={lang}
-          googleLabel={t["venue.google"]}
-          yandexLabel={t["venue.yandex"]}
-          mapLabel={t["venue.title"]}
+          title={{
+            uz: "Test bo'lim",
+            ru: "Тестовый раздел",
+            en: "Test section",
+          }}
+          text={{
+            uz: "Bu vaqtinchali — lokatsiya keyin qo'shiladi",
+            ru: "Временно — локация будет добавлена позже",
+            en: "Temporary — location will be added later",
+          }}
         />
 
         {couple.rsvp.enabled ? (
