@@ -6,7 +6,8 @@
  * bajarilmaydi ("Encountered a script tag..." xatosi). `next/script` esa
  * faylni `<head>` ga preload qilib, Next bootstrap paytida ijro qiladi.
  *
- * Manba: `couples.json` (sluglar) va `CNAME` (domen).
+ * Manba: `site.json` (domen) va `couples.json` (sluglar).
+ * CNAME (GitHub Pages) mavjud bo'lsa tekshiriladi — ammo manba hisoblanmaydi.
  */
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -14,15 +15,29 @@ import { dirname, join } from "node:path";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 
-const cname = join(root, "CNAME");
-if (!existsSync(cname)) {
-  console.error("[boot] CNAME fayli topilmadi — domen aniqlanmadi.");
+const sitePath = join(root, "site.json");
+if (!existsSync(sitePath)) {
+  console.error("[boot] site.json topilmadi — domen aniqlanmadi.");
   process.exit(1);
 }
-const domain = readFileSync(cname, "utf8").trim();
+
+const domain = JSON.parse(readFileSync(sitePath, "utf8")).domain;
+if (!domain) {
+  console.error("[boot] site.json ichida `domain` yo'q.");
+  process.exit(1);
+}
+
+const cname = join(root, "CNAME");
+if (existsSync(cname)) {
+  const c = readFileSync(cname, "utf8").trim();
+  if (c && c !== domain) {
+    console.warn(`[boot] CNAME ("${c}") va site.json ("${domain}") farq qiladi.`);
+  }
+}
+
 const slugs = JSON.parse(readFileSync(join(root, "couples.json"), "utf8"));
 
-const script = `/* avtomatik yaratilgan — couples.json va CNAME dan */
+const script = `/* avtomatik yaratilgan — site.json va couples.json dan */
 (function(){try{
 var B=${JSON.stringify(domain)},S=${JSON.stringify(slugs)},p=location.pathname.replace(/\\/+$/,"");
 if(!p){
@@ -41,4 +56,4 @@ if(!p){
 new Function(script);
 
 writeFileSync(join(root, "public", "boot.js"), script);
-console.log(`[boot] public/boot.js yaratildi (${slugs.length} ta taklifnoma)`);
+console.log(`[boot] public/boot.js yaratildi (${domain}, ${slugs.length} ta taklifnoma)`);

@@ -20,8 +20,10 @@ export const TELEGRAM_BOT = {
   api: (token: string) => `https://api.telegram.org/bot${token}/sendMessage`,
 };
 
-/** Sayt domeni — subdomen tekshiruvi uchun */
-export const BASE_DOMAIN = "taklifnoma.raximjonov.uz";
+import site from "../../site.json";
+
+/** Sayt domeni — subdomen tekshiruvi uchun (manba: site.json) */
+export const BASE_DOMAIN = site.domain;
 
 export const SITE_NAME = "Taklifnoma";
 

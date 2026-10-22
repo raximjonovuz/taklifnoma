@@ -13,9 +13,9 @@ manbalimizdan.
 | `jasur-madina.taklifnoma.raximjonov.uz/` | Avtomatik ravishda `/jasur-madina/` ga o'tadi |
 
 Subdomen tekshiruvi `public/boot.js` orqali bajariladi (statik eksportda server
-yo'q). Bu fayl `scripts/gen-boot.mjs` da `couples.json` + `CNAME` dan yaratiladi
-(`npm run dev`/`npm run build` oldidan avtomatik). Boshqa subdomen yoki domen →
-landing. Fayl Git'ga qo'shilmaydi.
+yo'q). Bu fayl `scripts/gen-boot.mjs` da `site.json` (domen) + `couples.json`
+(sluglar) dan yaratiladi (`npm run dev`/`npm run build` oldidan avtomatik).
+Boshqa subdomen yoki domen → landing. Fayl Git'ga qo'shilmaydi.
 
 ## Tuzilma
 
@@ -45,6 +45,7 @@ src/
   couples/            ma'lumotlar (hozir lokal, keyin server)
 
 couples.json          taklifnoma sluglari ro'yxati (boot.js shundan yaratiladi)
+site.json             sayt domeni (boot.js va kod shundan oladi)
 scripts/gen-boot.mjs  public/boot.js generatsiyasi
 ```
 
