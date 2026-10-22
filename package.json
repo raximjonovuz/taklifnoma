@@ -5,7 +5,7 @@
   "scripts": {
     "predev": "node scripts/gen-boot.mjs",
     "dev": "next dev",
-    "prebuild": "node scripts/gen-boot.mjs",
+    "prebuild": "node scripts/clean-out.mjs && node scripts/gen-boot.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",

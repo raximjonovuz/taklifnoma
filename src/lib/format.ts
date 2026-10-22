@@ -75,7 +75,7 @@ export function normalize(s: string): string {
     .trim();
 }
 
-/** "Jasur Madina" -> "jasur-madina" */
+/** "Ozodbek Madina" -> "ozodbek-madina" */
 export function slugify(s: string): string {
   return normalize(s)
     .replace(/[^a-zа-я0-9ёўқҳғ\s-]/gi, "")
